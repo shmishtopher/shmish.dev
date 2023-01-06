@@ -24,9 +24,9 @@ function NavItem({ href, text }) {
 }
 
 function Toggle() {
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
 
-  const toggleTheme = () => theme === "dark"
+  const toggleTheme = () => resolvedTheme === "dark"
     ? setTheme("light")
     : setTheme("dark")
 
@@ -36,7 +36,7 @@ function Toggle() {
       aria-label="Toggle dark mode"
       className="h-9 w-9 flex justify-center items-center ml-auto rounded-md text-base01 dark:text-base1 hover:bg-base2 dark:hover:bg-base02">
 
-      {theme === "dark" ? <Sun /> : <Moon />}
+      {resolvedTheme === "dark" ? <Sun /> : <Moon />}
     </button>
   )
 }
