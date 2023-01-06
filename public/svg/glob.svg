@@ -1,0 +1,55 @@
+<svg viewBox="40 30 120 150" preserveAspectRatio="xMaxYMin meet" shape-rendering="auto" xmlns="http://www.w3.org/2000/svg" width="200px">
+    <!-- Filter -->
+    <filter id="gooey">
+        <feGaussianBlur stdDeviation="5" in="SourceGraphic" result="blur"/>
+        <feColorMatrix mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 30 -20" in="blur" result="goo"/>
+        <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+    </filter>
+    
+    <!-- blob -->
+    <g style="filter:url('#gooey')" class="fill-base2 dark:fill-base02">
+        <circle id="b1" cx="95" cy="80" r="25"/>
+        <circle id="b2" cx="120" cy="105" r="25"/>
+        <circle id="b3" cx="95" cy="120" r="25"/>
+    </g>
+    
+    <!-- orbs -->
+    <circle id="c1" cx="75" cy="60" r="15" class="fill-red"/>
+    <circle id="c2" cx="135" cy="100" r="10" class="fill-yellow"/>
+    <circle id="c3" cx="65" cy="150" r="17" class="fill-blue"/>
+
+    <style>
+        @keyframes blob {
+            0% { transform: translate(7px, -7px); r: 25px; }
+            100% { transform: translate(-7px, 7px); r: 40px; }
+        }
+
+        @keyframes hover {
+            0% { transform: translate(0, -3px); }
+            100% { transform: translate(0, 3px); }
+        }
+
+        #b1 { animation: blob 13s ease-in-out alternate infinite; }
+        #b2 { animation: blob 8s ease-in-out alternate infinite; }
+        #b3 { animation: blob 7s ease-in-out alternate infinite; }
+
+        #c1 {
+            animation: hover 4s ease-in-out alternate infinite;
+            transition: r .3s ease-out;
+        }
+
+        #c2 {
+            animation: hover 2.5s ease-in-out alternate infinite;
+            transition: r .3s ease-out;
+        }
+
+        #c3 {
+            animation: hover 3s ease-in-out alternate infinite;
+            transition: r .3s ease-out;
+        }
+
+        #c1:hover { r: 20px }
+        #c2:hover { r: 15px }
+        #c3:hover { r: 20px }    
+    </style>
+</svg>
