@@ -35,6 +35,6 @@ export async function getStaticProps() {
   
   return {
     props: { repos },
-    revalidate: 600,
+    revalidate: 1200,
   }
 }
