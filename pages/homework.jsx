@@ -19,23 +19,22 @@ export default function homework({ repos }) {
   )
 }
 
-export async function getServerSideProps({ res }) {
-  res.setHeader('Cache-Control', 's-maxage=18000')
-
+export async function getStaticProps() {
   const repos = await Promise.all([
-    fetch('https://api.github.com/repos/shmishtopher/CS-253').then(x => x.json()),
-    fetch('https://api.github.com/repos/shmishtopher/CS-355').then(x => x.json()),
-    fetch('https://api.github.com/repos/shmishtopher/CS-354').then(x => x.json()),
-    fetch('https://api.github.com/repos/shmishtopher/CS-254').then(x => x.json()),
-    fetch('https://api.github.com/repos/shmishtopher/CS-153').then(x => x.json()),
-    fetch('https://api.github.com/repos/shmishtopher/CS-385').then(x => x.json()),
-    fetch('https://api.github.com/repos/shmishtopher/CS-483').then(x => x.json()),
-    fetch('https://api.github.com/repos/shmishtopher/CS-492').then(x => x.json()),
-    fetch('https://api.github.com/repos/shmishtopher/CS-463').then(x => x.json()),
-    fetch('https://api.github.com/repos/shmishtopher/Semantic-Web').then(x => x.json()),
+    fetch("https://api.github.com/repos/shmishtopher/CS-253").then(x => x.json()),
+    fetch("https://api.github.com/repos/shmishtopher/CS-355").then(x => x.json()),
+    fetch("https://api.github.com/repos/shmishtopher/CS-354").then(x => x.json()),
+    fetch("https://api.github.com/repos/shmishtopher/CS-254").then(x => x.json()),
+    fetch("https://api.github.com/repos/shmishtopher/CS-153").then(x => x.json()),
+    fetch("https://api.github.com/repos/shmishtopher/CS-385").then(x => x.json()),
+    fetch("https://api.github.com/repos/shmishtopher/CS-483").then(x => x.json()),
+    fetch("https://api.github.com/repos/shmishtopher/CS-492").then(x => x.json()),
+    fetch("https://api.github.com/repos/shmishtopher/CS-463").then(x => x.json()),
+    fetch("https://api.github.com/repos/shmishtopher/Semantic-Web").then(x => x.json()),
   ])
   
   return {
-    props: { repos }
+    props: { repos },
+    revalidate: 600,
   }
 }

@@ -53,14 +53,13 @@ export default function Home({ repos }) {
   )
 }
 
-export async function getServerSideProps({ res }) {
-  res.setHeader('Cache-Control', 's-maxage=120')
-
+export async function getStaticProps() {
   const repos = await fetch("https://api.github.com/users/shmishtopher/repos?sort=created&type=owner")
     .then(res => res.json())
     .then(res => res.slice(0, 6))
   
   return {
-    props: { repos }
+    props: { repos },
+    revalidate: 120,
   }
 }
