@@ -8,7 +8,9 @@ import Sun from "/public/svg/sun.svg"
 
 function NavItem({ href, text }) {
   const router = useRouter()
-  const active = router.asPath === href
+  const [active, setActive] = useState(false)
+
+  useEffect(() => setActive(router.asPath === href), [router])
 
   return (
     <Link
