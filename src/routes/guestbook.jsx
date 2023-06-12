@@ -4,7 +4,7 @@ import {
   HttpHeader,
 } from "solid-start/server"
 import { FormError } from "solid-start/data"
-import { Show, For } from "solid-js"
+import { Show, For, Suspense } from "solid-js"
 import { useSearchParams, redirect, Title, Meta } from "solid-start"
 import cookie from "cookie"
 import jwt from "jsonwebtoken"
@@ -198,67 +198,77 @@ export default function Guestbook() {
         </div>
       </Show>
 
-      <For each={messages()?.messages}>
-        {message => (
-          <div class="mt-5 flex flex-col">
-            <div class="flex flex-row font-hubot">
-              <a
-                href={message.url}
-                class="mr-2 font-semibold text-base01 dark:text-base1"
-              >
-                {message.name}
-              </a>
-              <span class="text-base-1 mr-2 text-base1 dark:text-base01">
-                &bull;
-              </span>
-              <span class="text-base-1 mr-2 text-base1 dark:text-base01">
-                {formatDate(message.date)}
+      <Suspense
+        fallback={
+          <p class="mt-5 font-hubot font-semibold text-base01 dark:text-base1">
+            Loading messages...
+          </p>
+        }
+      >
+        <For each={messages()?.messages}>
+          {message => (
+            <div class="mt-5 flex flex-col">
+              <div class="flex flex-row font-hubot">
+                <a
+                  href={message.url}
+                  class="mr-2 font-semibold text-base01 dark:text-base1"
+                >
+                  {message.name}
+                </a>
+                <span class="text-base-1 mr-2 text-base1 dark:text-base01">
+                  &bull;
+                </span>
+                <span class="text-base-1 mr-2 text-base1 dark:text-base01">
+                  {formatDate(message.date)}
+                </span>
+              </div>
+              <span class="font-mona text-base00 dark:text-base0">
+                {message.text}
               </span>
             </div>
-            <span class="font-mona text-base00 dark:text-base0">
-              {message.text}
+          )}
+        </For>
+
+        <div class="mt-5 flex flex-row font-hubot text-sm font-semibold text-base1 dark:text-base01">
+          <div class="rounded-md bg-base2 px-4 py-2 dark:bg-base02">
+            <span class="mx-1">{messages()?.start + 1}</span>
+            <span>&dash;</span>
+            <span class="mx-1">
+              {Math.min(messages()?.end + 1, msgCount())}
             </span>
+            <span>of</span>
+            <span class="mx-1">{msgCount()}</span>
           </div>
-        )}
-      </For>
 
-      <div class="mt-5 flex flex-row font-hubot text-sm font-semibold text-base1 dark:text-base01">
-        <div class="rounded-md bg-base2 px-4 py-2 dark:bg-base02">
-          <span class="mx-1">{messages()?.start + 1}</span>
-          <span>&dash;</span>
-          <span class="mx-1">{Math.min(messages()?.end + 1, msgCount())}</span>
-          <span>of</span>
-          <span class="mx-1">{msgCount()}</span>
+          <Show when={messages()?.start > 0}>
+            <a
+              class="ml-2 rounded-md bg-base2 px-3 py-2 transition-all hover:text-base01 dark:bg-base02 dark:hover:text-base1"
+              href={`?page=${parseInt(params.page ?? 1) - 1}`}
+              onClick={e => {
+                e.preventDefault()
+                e.stopPropagation()
+                setParams({ page: parseInt(params.page ?? 1) - 1 })
+              }}
+            >
+              &ShortLeftArrow;
+            </a>
+          </Show>
+
+          <Show when={messages()?.end < msgCount()}>
+            <a
+              class="ml-2 rounded-md bg-base2 px-3 py-2 transition-all hover:text-base01 dark:bg-base02 dark:hover:text-base1"
+              href={`?page=${parseInt(params.page ?? 1) + 1}`}
+              onClick={e => {
+                e.preventDefault()
+                e.stopPropagation()
+                setParams({ page: parseInt(params.page ?? 1) + 1 })
+              }}
+            >
+              &RightArrow;
+            </a>
+          </Show>
         </div>
-
-        <Show when={messages()?.start > 0}>
-          <a
-            class="ml-2 rounded-md bg-base2 px-3 py-2 transition-all hover:text-base01 dark:bg-base02 dark:hover:text-base1"
-            href={`?page=${parseInt(params.page ?? 1) - 1}`}
-            onClick={e => {
-              e.preventDefault()
-              e.stopPropagation()
-              setParams({ page: parseInt(params.page ?? 1) - 1 })
-            }}
-          >
-            &ShortLeftArrow;
-          </a>
-        </Show>
-
-        <Show when={messages()?.end < msgCount()}>
-          <a
-            class="ml-2 rounded-md bg-base2 px-3 py-2 transition-all hover:text-base01 dark:bg-base02 dark:hover:text-base1"
-            href={`?page=${parseInt(params.page ?? 1) + 1}`}
-            onClick={e => {
-              e.preventDefault()
-              e.stopPropagation()
-              setParams({ page: parseInt(params.page ?? 1) + 1 })
-            }}
-          >
-            &RightArrow;
-          </a>
-        </Show>
-      </div>
+      </Suspense>
     </>
   )
 }

@@ -3,7 +3,8 @@ import { Name, Glob } from "~/components/svg"
 import { HttpHeader, createServerData$ } from "solid-start/server"
 import Redis from "ioredis"
 import RepoCard from "~/components/repo-card"
-import { For } from "solid-js"
+import LoadingCard from "~/components/loading-card"
+import { For, Suspense } from "solid-js"
 
 // Configure our redis client
 const redis = new Redis(import.meta.env.VITE_GUESTBOOK_REDIS)
@@ -97,7 +98,15 @@ export default function Home() {
         </h1>
 
         <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2">
-          <For each={repos()}>{repo => <RepoCard {...repo} />}</For>
+          <Suspense
+            fallback={Array(6)
+              .fill(0)
+              .map(_ => (
+                <LoadingCard />
+              ))}
+          >
+            <For each={repos()}>{repo => <RepoCard {...repo} />}</For>
+          </Suspense>
         </div>
       </section>
     </>
