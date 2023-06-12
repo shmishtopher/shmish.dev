@@ -1,6 +1,0 @@
-@import "./links.css";
-@import "./tags.css";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
