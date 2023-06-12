@@ -1,32 +1,36 @@
 {
-  "name": "shmish.dev",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
+  "name": "shmish.solid",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "solid-start dev",
+    "build": "solid-start build",
+    "start": "solid-start start",
+    "format": "prettier --write src \"*.json\" \"*.cjs\""
+  },
+  "type": "module",
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "prettier": "^2.8.8",
+    "prettier-plugin-tailwindcss": "^0.3.0",
+    "solid-start-node": "^0.2.19",
+    "tailwindcss": "^3.2.4",
+    "vite": "^4.1.4"
   },
   "dependencies": {
-    "@mdx-js/loader": "^2.2.1",
-    "@mdx-js/react": "^2.2.1",
-    "@next/font": "13.1.1",
-    "@next/mdx": "^13.1.1",
-    "@vercel/analytics": "^0.1.6",
-    "next": "13.1.1",
-    "next-themes": "^0.2.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "rss": "^1.2.2",
-    "typed.js": "^2.0.12"
+    "@solid-primitives/resource": "^0.1.0",
+    "@solidjs/meta": "^0.28.2",
+    "@solidjs/router": "^0.8.2",
+    "cookie": "^0.5.0",
+    "feed": "^4.2.2",
+    "ioredis": "^5.3.2",
+    "jsonwebtoken": "^9.0.0",
+    "solid-js": "^1.7.2",
+    "solid-start": "^0.2.26",
+    "solid-start-vercel": "^0.2.26",
+    "undici": "^5.15.1"
   },
-  "devDependencies": {
-    "@svgr/webpack": "^6.5.1",
-    "@tailwindcss/typography": "^0.5.8",
-    "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.20",
-    "tailwindcss": "^3.2.4"
+  "engines": {
+    "node": ">=16"
   }
 }
