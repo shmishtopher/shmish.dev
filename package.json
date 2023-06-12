@@ -4,7 +4,7 @@
     "dev": "solid-start dev",
     "build": "solid-start build",
     "start": "solid-start start",
-    "format": "prettier --write src \"*.json\" \"*.cjs\""
+    "format": "prettier --write src \"*.json\" \"*.js\" \"*.cjs\""
   },
   "type": "module",
   "devDependencies": {
