@@ -226,7 +226,7 @@ export default function Guestbook() {
         <div class="rounded-md bg-base2 px-4 py-2 dark:bg-base02">
           <span class="mx-1">{messages()?.start + 1}</span>
           <span>&dash;</span>
-          <span class="mx-1">{Math.max(messages()?.end + 1, msgCount())}</span>
+          <span class="mx-1">{Math.min(messages()?.end + 1, msgCount())}</span>
           <span>of</span>
           <span class="mx-1">{msgCount()}</span>
         </div>
