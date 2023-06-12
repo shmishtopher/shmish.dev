@@ -7,7 +7,7 @@ export default defineConfig({
     solid({
       ssr: true,
       adapter: vercel({
-        edge: true
+        edge: true,
       }),
     }),
   ],
