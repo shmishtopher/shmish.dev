@@ -25,7 +25,7 @@ async function getMessagesPaged(page = 1) {
   const end = start + pageSize - 1
 
   // Fetch messages in reverse order, then parse them.
-  const messages = await redis.zrevrange("messages", start, end)
+  const messages = await redis.lrange("messages", start, end)
   return { start, end, messages: messages.map(JSON.parse) }
 }
 
@@ -101,7 +101,7 @@ async function submitMessage(formData, { request }) {
   const value = JSON.stringify({ name, url, text, date })
 
   await Promise.all([
-    redis.zadd("messages", date, value),
+    redis.lpush("messages", value),
     redis.hset("last_message", login, date),
   ])
 
@@ -149,7 +149,7 @@ export default function Guestbook() {
   const messages = createServerData$(getMessagesPaged, {
     key: () => parseInt(params.page ?? 1),
   })
-  const msgCount = createServerData$(() => redis.zcard("messages"))
+  const msgCount = createServerData$(() => redis.llen("messages"))
   const [posting, { Form }] = createServerAction$(submitMessage)
 
   return (
