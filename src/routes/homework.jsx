@@ -1,7 +1,8 @@
-import { For } from "solid-js"
+import { For, Suspense } from "solid-js"
 import { HttpHeader, createServerData$ } from "solid-start/server"
 import Redis from "ioredis"
 import RepoCard from "~/components/repo-card"
+import LoadingCard from "~/components/loading-card"
 import { Meta, Title } from "solid-start"
 
 // Configure our redis client
@@ -69,7 +70,9 @@ export default function Homework() {
       </h1>
 
       <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2">
-        <For each={repos()}>{repo => <RepoCard {...repo} />}</For>
+        <Suspense fallback={<LoadingCard />}>
+          <For each={repos()}>{repo => <RepoCard {...repo} />}</For>
+        </Suspense>
       </div>
     </>
   )
