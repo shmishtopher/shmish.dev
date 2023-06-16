@@ -20,6 +20,11 @@ async function getRepos() {
     return JSON.parse(data)
   }
 
+  // Set auth headers
+  const headers = {
+    "Authorization": `Bearer ${import.meta.env.VITE_GH_TOKEN}`
+  }
+
   // Otherwise, fetch from the github API and store the
   // response in the redis cache for 5 min.
   const responses = [
@@ -34,7 +39,7 @@ async function getRepos() {
     "https://api.github.com/repos/shmishtopher/CS-463",
     "https://api.github.com/repos/shmishtopher/Semantic-Web",
   ]
-    .map(url => fetch(url))
+    .map(url => fetch(url, { headers }))
     .map(p => p.then(res => res.json()))
 
   const repos = await Promise.all(responses)

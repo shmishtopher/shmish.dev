@@ -21,10 +21,16 @@ async function getRepos() {
     return JSON.parse(data)
   }
 
+  // Set auth header
+  const headers = {
+    "Authorization": `Bearer ${import.meta.env.VITE_GH_TOKEN}`
+  }
+
   // Otherwise, fetch from the github API and store the
   // response in the redis cache for 5 min.
   const repos = await fetch(
-    "https://api.github.com/users/shmishtopher/repos?sort=created&type=owner"
+    "https://api.github.com/users/shmishtopher/repos?sort=created&type=owner",
+    { headers }
   )
     .then(res => res.json())
     .then(res => res.slice(0, 6))
