@@ -33,6 +33,7 @@ async function getRepos() {
     { headers }
   )
     .then(res => res.json())
+    .then(res => res.filter(repo => !repo.fork))
     .then(res => res.slice(0, 6))
 
   await redis.setex("recentRepos", 60 * 5, JSON.stringify(repos))
