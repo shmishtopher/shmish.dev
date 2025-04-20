@@ -1,18 +1,25 @@
 import { defineConfig } from "@solidjs/start/config";
+import tailwindcss from "@tailwindcss/vite";
+import mdx from "@mdx-js/rollup";
+import { options } from "prettier-plugin-tailwindcss";
 
-const hmrPorts = {
-  "client": 4440,
-  "server": 4441,
-  "server-function": 4442,
-};
-
+// Define a minimal config for the application. All we need
+// is the tailwind vite plugin and the mdx plugin. The
+// default configuration is sufficient for everything else.
 export default defineConfig({
-  vite: ({ router }) => ({
-    server: {
-      hmr: {
-        protocol: "ws",
-        port: hmrPorts[router],
+  server: {
+    esbuild: {
+      options: {
+        target: "esnext",
       },
     },
-  }),
+  },
+  vite: {
+    plugins: [
+      tailwindcss(),
+      mdx({
+        jsxImportSource: "solid-js/h",
+      }),
+    ],
+  },
 });

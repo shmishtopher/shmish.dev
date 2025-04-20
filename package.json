@@ -1,33 +1,41 @@
 {
-  "name": "example-bare",
+  "name": "portfolio",
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
     "build": "vinxi build",
-    "start": "vinxi start"
+    "start": "vinxi start",
+    "fmt": "prettier . --write"
   },
   "dependencies": {
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.15.1",
     "@solidjs/start": "^1.0.10",
     "feed": "^4.2.2",
-    "marked": "^15.0.4",
-    "marked-footnote": "^1.2.4",
-    "marked-gfm-heading-id": "^4.1.1",
-    "postgres": "^3.4.5",
+    "graphql-request": "^7.1.2",
     "sitemap": "^8.0.0",
     "solid-js": "^1.9.2",
-    "vinxi": "^0.4.3"
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
+    "vinxi": "^0.5.4"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.15",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
+    "@mdx-js/rollup": "^3.1.0",
+    "@tailwindcss/vite": "^4.1.4",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.9",
-    "tailwindcss": "^3.4.15"
+    "tailwindcss": "^4.1.4"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "arrowParens": "avoid",
+    "quoteProps": "consistent",
+    "plugins": [
+      "prettier-plugin-tailwindcss"
+    ]
   }
 }
