@@ -13,15 +13,6 @@ jobs:
       contents: read
       packages: write
 
-    strategy:
-      matrix:
-        include:
-          - image_name: ghcr.io/${{ github.repository }}-application
-            dockerfile: docker/application.Dockerfile
-
-          - image_name: ghcr.io/${{ github.repository }}-database
-            dockerfile: docker/database.Dockerfile
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -37,13 +28,12 @@ jobs:
         uses: docker/metadata-action@v5
         id: metadata
         with:
-          images: ${{ matrix.image_name }}
+          images: "ghcr.io/shmishtopher/shmish.dev"
 
       - name: Bake the Image
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ${{ matrix.dockerfile }}
           push: true
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}

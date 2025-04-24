@@ -2,50 +2,43 @@ import { ErrorBoundary, Suspense } from "solid-js";
 import { A, Router } from "@solidjs/router";
 import { MetaProvider, Title, Meta } from "@solidjs/meta";
 import { FileRoutes } from "@solidjs/start/router";
-import "~/app.css";
 import NotFound from "./routes/[...404]";
+import "~/app.css";
 
+// The main application shell. These elements wrap all of
+// the pages and contains basic navigation.
 function Shell(props) {
   // Let's define some styles for our navigation compnents
   // to use.  Different classes are applied based on the
   // currently active page
   const linkStyles = {
-    activeClass:
-      "rounded-md p-2 font-hubot hover:bg-base2 dark:hover:bg-base02 md:px-3 underline underline-offset-4 decoration-1 text-base01 dark:text-base1",
-    inactiveClass:
-      "rounded-md p-2 font-hubot hover:bg-base2 dark:hover:bg-base02 md:px-3 no-underline text-base00 dark:text-base0",
+    class: "font-sans decoration-1 underline-offset-4 hover:underline",
+    activeClass: "underline text-base01 dark:text-base1",
+    inactiveClass: "no-underline text-base00 dark:text-base0",
   };
 
   return (
     <MetaProvider>
       <Title>shmish.dev</Title>
 
-      <Meta
-        name="description"
-        content="Shmish's little corner of the internet"
-      />
-
+      <Meta name="description" content="Shmish's corner of the internet" />
       <Meta name="og:title" content="shmish.dev" />
       <Meta name="og:type" content="website" />
       <Meta name="og:image" content="/images/banner.png" />
       <Meta name="og:url" content="https://shmish.dev/" />
       <Meta name="og:site_name" content="shmish.dev" />
-      <Meta
-        name="og:description"
-        content="Shmish's little corner of the internet"
-      />
+      <Meta name="og:description" content="Shmish's corner of the internet" />
 
       <main class="mx-auto flex max-w-2xl flex-col px-7 py-2 md:px-0">
-        <nav class="relative -left-2 mb-8 mt-6 flex flex-row items-center md:-left-3">
+        <nav class="mt-6 mb-8 flex flex-row items-center">
           <A {...linkStyles} href="/" end={true}>
             Home
           </A>
+          <span class="text-base1 dark:text-base01 mx-4 select-none">/</span>
           <A {...linkStyles} href="/notes">
             Notes
           </A>
-          <A {...linkStyles} href="/baubles">
-            Baubles
-          </A>
+          <span class="text-base1 dark:text-base01 mx-4 select-none">/</span>
           <A {...linkStyles} href="/guestbook">
             Guestbook
           </A>
@@ -55,34 +48,31 @@ function Shell(props) {
           <ErrorBoundary fallback={NotFound()}>{props.children}</ErrorBoundary>
         </Suspense>
 
-        <footer class="my-10 flex w-full flex-col border-t-2 border-solid border-base2 py-8 font-hubot text-base00 md:flex-row md:justify-between dark:border-base02 dark:text-base0">
+        <footer class="border-base2 text-base00 dark:border-base02 dark:text-base0 my-10 flex w-full flex-col border-t-2 border-solid py-8 font-sans md:flex-row md:justify-between">
           <ul>
-            <li class="mb-4 hover:text-base01 hover:dark:text-base1">
+            <li class="hover:text-base01 hover:dark:text-base1 mb-4">
               <A href="/">Home</A>
             </li>
-            <li class="mb-4 hover:text-base01 hover:dark:text-base1">
+            <li class="hover:text-base01 hover:dark:text-base1 mb-4">
               <A href="/notes">Notes</A>
             </li>
-            <li class="mb-4 hover:text-base01 hover:dark:text-base1">
-              <A href="/baubles">Baubles</A>
-            </li>
-            <li class="mb-4 hover:text-base01 hover:dark:text-base1">
+            <li class="hover:text-base01 hover:dark:text-base1 mb-4">
               <A href="/guestbook">Guestbook</A>
             </li>
           </ul>
 
           <ul>
-            <li class="mb-4 hover:text-base01 hover:dark:text-base1">
+            <li class="hover:text-base01 hover:dark:text-base1 mb-4">
               <a rel="external" href="https://github.com/shmishtopher">
                 GitHub
               </a>
             </li>
-            <li class="mb-4 hover:text-base01 hover:dark:text-base1">
+            <li class="hover:text-base01 hover:dark:text-base1 mb-4">
               <a rel="external" href="https://www.youtube.com/@shmishtopher">
                 YouTube
               </a>
             </li>
-            <li class="mb-4 hover:text-base01 hover:dark:text-base1">
+            <li class="hover:text-base01 hover:dark:text-base1 mb-4">
               <a
                 rel="external"
                 href="https://www.linkedin.com/in/christopher-schmitt-3939431b5"
@@ -90,25 +80,20 @@ function Shell(props) {
                 LinkedIn
               </a>
             </li>
-            <li class="mb-4 hover:text-base01 hover:dark:text-base1">
-              <a rel="external" href="mailto:me@shmish.dev">
-                Contact
-              </a>
-            </li>
           </ul>
 
           <ul>
-            <li class="mb-4 hover:text-base01 hover:dark:text-base1">
+            <li class="hover:text-base01 hover:dark:text-base1 mb-4">
               <a rel="external" href="/api/feed.rss">
                 RSS Feed
               </a>
             </li>
-            <li class="mb-4 hover:text-base01 hover:dark:text-base1">
+            <li class="hover:text-base01 hover:dark:text-base1 mb-4">
               <a rel="external" href="/api/sitemap.xml">
                 Sitemap
               </a>
             </li>
-            <li class="mb-4 hover:text-base01 hover:dark:text-base1">
+            <li class="hover:text-base01 hover:dark:text-base1 mb-4">
               <a
                 rel="external"
                 href="https://github.com/shmishtopher/shmish.dev"
