@@ -268,3 +268,10 @@ export default function Guestbook() {
     </>
   );
 }
+
+// Define a preload method on this route so that we start
+// loading entries from the guestbook database as early as
+// possible
+export const route = {
+  preload: getEntries,
+};
