@@ -16,7 +16,7 @@ export default createHandler(() => (
             rel="alternate"
             type="application/rss+xml"
             title="Shmish's Notes"
-            href="/rss.xml"
+            href="/api/feed.rss"
           />
 
           <meta charset="utf-8" />
