@@ -7,7 +7,11 @@ export default createHandler(() => (
       <html lang="en">
         <head>
           <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
-          <link rel="icon" type="image/png" href="/images/favicon.png" />
+          <link rel="icon" sizes="16x16" type="image/png" href="/images/favicon-16.png" />
+          <link rel="icon" sizes="32x32" type="image/png" href="/images/favicon-32.png" />
+          <link rel="icon" sizes="180x180" type="image/png" href="/images/favicon-180.png" />
+          <link rel="icon" sizes="192x192" type="image/png" href="/images/favicon-192.png" />
+          <link rel="icon" sizes="512x512" type="image/png" href="/images/favicon-512.png" />
           <link
             rel="alternate"
             type="application/rss+xml"
