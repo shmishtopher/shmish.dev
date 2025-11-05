@@ -44,6 +44,5 @@
 @layer components {
   .link {
     @apply text-blue;
-    @apply font-semibold;
   }
 }
