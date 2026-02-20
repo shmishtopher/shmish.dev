@@ -41,8 +41,10 @@ function RepoCard({ url, name, lang, desc, count }) {
       href={url}
       class="bg-base2 ring-blue dark:bg-base02 flex h-full flex-col rounded-md p-4 transition-shadow hover:ring-2"
     >
-      <div class="flex flex-row leading-none font-semibold">
-        <span class="text-base00 dark:text-base1 mr-auto">{name}</span>
+      <div class="flex flex-row leading-none">
+        <span class="text-base00 dark:text-base1 mr-auto font-semibold">
+          {name}
+        </span>
         <span class="text-base1 dark:text-base01 ml-auto">{lang}</span>
       </div>
       <p class="text-base00 dark:text-base0 my-2">{desc}</p>
@@ -157,12 +159,12 @@ export default function Home() {
 
         <p class="text-base00 dark:text-base0 mt-5 text-justify font-sans">
           I'm a software engineer and maker of things bringing your embedded
-          projects to life with the brilliant team over at {" "}
+          projects to life with the brilliant team over at{" "}
           <a href="https://prescoinc.com" class="link">
             PRESCO, Inc.
           </a>{" "}
         </p>
-      
+
         <p class="text-base00 dark:text-base0 mt-5 text-justify font-sans">
           I also take on select freelance work in Rust development and edge
           machine learning systems. Building something ambitious? Reach out
@@ -170,7 +172,7 @@ export default function Home() {
           <a class="link" href="mailto:me@shmish.dev">
             me@shmish.dev
           </a>{" "}
-          &mdash; Or explore some of my work on {" "}
+          &mdash; Or explore some of my work on{" "}
           <a class="link" href="https://github.com/shmishtopher">
             GitHub
           </a>{" "}

@@ -76,7 +76,7 @@ networks:
 
 ### Extra files
 
-Note that these files must exist on the host *before*
+Note that these files must exist on the host _before_
 bringing up the stack. We need to create `production.env`
 file, a `Caddyfile`, and a `portfolio.sqlite` file.
 
