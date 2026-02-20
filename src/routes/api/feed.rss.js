@@ -7,15 +7,15 @@ export async function GET() {
   };
 
   const feed = new Feed({
-    title: "Shmish's Notes",
-    description: "Notes on Technology, Computer Science, and Public Policy",
-    id: "https://shmish.dev/notes",
-    link: "https://shmish.dev/notes",
+    title: "Shmish's Baubles",
+    description: "A directory of finished projects and creative works",
+    id: "https://shmish.dev/baubles",
+    link: "https://shmish.dev/baubles",
     language: "en",
     image: "https://shmish.dev/images/banner.png",
     favicon: "https://shmish.dev/images/favicon.svg",
     copyright: "2023 Chritopher K. Schmitt",
-    updated: notes[0]?.date,
+    updated: baubles[0]?.date,
     author: {
       name: "Christopher K. Schmitt",
       email: "me@shmish.dev",

@@ -6,7 +6,7 @@ export async function GET() {
   // Create all of the base routes
   const baseRoutes = [
     { url: "/", priority: 1.0 },
-    { url: "/notes", priority: 0.9 },
+    { url: "/baubles", priority: 0.9 },
     { url: "/guestbook", priority: 0.8 },
   ];
 

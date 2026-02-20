@@ -15,7 +15,7 @@ export default createHandler(() => (
           <link
             rel="alternate"
             type="application/rss+xml"
-            title="Shmish's Notes"
+            title="Shmish's Baubles"
             href="/api/feed.rss"
           />
 

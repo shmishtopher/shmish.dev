@@ -35,8 +35,8 @@ function Shell(props) {
             Home
           </A>
           <span class="text-base1 dark:text-base01 mx-4 select-none">/</span>
-          <A {...linkStyles} href="/notes">
-            Notes
+          <A {...linkStyles} href="/baubles">
+            Baubles
           </A>
           <span class="text-base1 dark:text-base01 mx-4 select-none">/</span>
           <A {...linkStyles} href="/guestbook">
@@ -54,7 +54,7 @@ function Shell(props) {
               <A href="/">Home</A>
             </li>
             <li class="hover:text-base01 hover:dark:text-base1 mb-4">
-              <A href="/notes">Notes</A>
+              <A href="/baubles">Baubles</A>
             </li>
             <li class="hover:text-base01 hover:dark:text-base1 mb-4">
               <A href="/guestbook">Guestbook</A>
