@@ -16,7 +16,6 @@ const repoQuery = gql`
       ) {
         nodes {
           name
-          description
           url
           primaryLanguage {
             name
@@ -24,8 +23,13 @@ const repoQuery = gql`
           defaultBranchRef {
             target {
               ... on Commit {
-                history {
+                history(first: 3) {
                   totalCount
+                  nodes {
+                    abbreviatedOid
+                    messageHeadline
+                    committedDate
+                  }
                 }
               }
             }
@@ -53,12 +57,17 @@ export async function fetchRepos() {
   // Extract the basic repo data into more digestable
   // objects
   return repos.map(repo => {
+    const history = repo.defaultBranchRef.target.history;
     return {
       name: repo.name,
-      desc: repo.description,
       lang: repo.primaryLanguage.name,
       url: repo.url,
-      count: repo.defaultBranchRef.target.history.totalCount,
+      count: history.totalCount,
+      commits: history.nodes.map(c => ({
+        oid: c.abbreviatedOid,
+        message: c.messageHeadline,
+        date: c.committedDate,
+      })),
     };
   });
 }

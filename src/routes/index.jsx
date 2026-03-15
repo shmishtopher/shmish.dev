@@ -33,23 +33,52 @@ const getRepos = query(async () => {
   return repos;
 });
 
-// A component for displaying all the information about a
-// recently updated repository.
-function RepoCard({ url, name, lang, desc, count }) {
+// Format a date string as a short relative time (e.g. "3d", "2w").
+function timeAgo(date) {
+  const s = Math.floor((Date.now() - new Date(date)) / 1000);
+  if (s < 60) return `${s}s`;
+  const m = Math.floor(s / 60);
+  if (m < 60) return `${m}m`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h`;
+  const d = Math.floor(h / 24);
+  if (d < 7) return `${d}d`;
+  const w = Math.floor(d / 7);
+  if (w < 4) return `${w}w`;
+  return `${Math.floor(d / 30)}mo`;
+}
+
+// A component for displaying a repository as a git-log style
+// commit list.
+function RepoCard({ url, name, lang, commits, count }) {
   return (
     <a
       href={url}
       class="bg-base2 ring-blue dark:bg-base02 flex h-full flex-col rounded-md p-4 transition-shadow hover:ring-2"
     >
-      <div class="flex flex-row leading-none">
+      <div class="mb-3 flex flex-row leading-none">
         <span class="text-base00 dark:text-base1 mr-auto font-semibold">
           {name}
         </span>
         <span class="text-base1 dark:text-base01 ml-auto">{lang}</span>
       </div>
-      <p class="text-base00 dark:text-base0 my-2">{desc}</p>
-      <p class="text-base1 dark:text-base01 mt-auto font-sans leading-none">
-        {count} Commit{count !== 1 ? "s" : ""}
+      <div class="flex flex-col gap-1.5 font-mono text-sm">
+        <For each={commits}>
+          {commit => (
+            <div class="flex min-w-0 flex-row items-baseline gap-2">
+              <span class="text-blue shrink-0">{commit.oid}</span>
+              <span class="text-base00 dark:text-base0 min-w-0 truncate">
+                {commit.message}
+              </span>
+              <span class="text-base1 dark:text-base01 ml-auto shrink-0 text-xs">
+                {timeAgo(commit.date)}
+              </span>
+            </div>
+          )}
+        </For>
+      </div>
+      <p class="text-base1 dark:text-base01 mt-3 font-mono text-xs leading-none">
+        +{count - commits.length} more
       </p>
     </a>
   );
